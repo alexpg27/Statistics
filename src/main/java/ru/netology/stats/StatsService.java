@@ -17,14 +17,8 @@ public class StatsService {
     //Средняя сумма продаж в месяц
 
     public int averageSales(int[] allSales) {
-        int sum = 0;
-        int result = 0;
-        for (int value : allSales) {
-            sum += value;
-            result = sum / allSales.length;
-        }
-
-        return result;
+        int averageSales = allSalesSum(allSales) / allSales.length;
+        return averageSales;
     }
 
     //Номер месяца, в котором был пик продаж
@@ -62,8 +56,8 @@ public class StatsService {
     public int monthBelowAverageSales(int[] allSales) {
         int numberOfMonth = 0;
         for (int value : allSales) {
-            if (value < 15) {
-                numberOfMonth++;
+            if (value < averageSales(allSales)) {
+                numberOfMonth += 1;
             }
         }
         return numberOfMonth;
@@ -75,8 +69,8 @@ public class StatsService {
     public int monthUnderAverageSales(int[] allSales) {
         int numberOfMonth = 0;
         for (int value : allSales) {
-            if (value > 15) {
-                numberOfMonth++;
+            if (value > averageSales(allSales)) {
+                numberOfMonth += 1;
             }
         }
         return numberOfMonth;
